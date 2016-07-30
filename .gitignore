@@ -1,0 +1,6 @@
+.*.swp
+id_rsa
+id_rsa.*
+terraform.*
+hosts.ini
+playbook.retry

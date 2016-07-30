@@ -1,0 +1,38 @@
+- hosts: all
+
+  gather_facts: true
+
+  become: true
+
+  vars:
+    aws_region: us-west-2
+    aws_az: us-west-2c
+    efs_id: xxxxxxxx
+
+  tasks:
+  - yum: name={{ item }} state=present
+    with_items:
+    - epel-release
+    - https://yum.puppetlabs.com/puppetlabs-release-el-{{ ansible_distribution_major_version }}.noarch.rpm
+    tags:
+    - yum
+
+  - yum: name={{ item }} state=present
+    with_items:
+    - vim-enhanced
+    - sysstat
+    - bind-utils
+    - jq
+    - nfs-utils
+    tags:
+    - yum
+
+  - file: path=/efs state=directory
+    tags:
+    - mount.efs
+
+  - mount: name=/efs src={{ aws_az }}.{{ efs_id }}.efs.{{ aws_region }}.amazonaws.com:/
+           fstype=nfs state=mounted
+    tags:
+    - mount.efs
+
