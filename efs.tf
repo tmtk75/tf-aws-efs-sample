@@ -1,5 +1,6 @@
 resource "aws_efs_file_system" "efs-test" {
-    reference_name = "efs-test"
+    #reference_name = "efs-test"
+    creation_token = "efs-test"
     tags {
        Name = "efs-test"
     }
