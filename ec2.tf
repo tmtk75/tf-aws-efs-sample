@@ -27,7 +27,7 @@ resource "aws_security_group" "efs-test" {
         from_port   = 22
         to_port     = 22
         protocol    = "tcp"
-        cidr_blocks = [ "${var.cidr}/32" ]
+        cidr_blocks = [ "${var.cidr}" ]
     }
     tags = {
         Name = "${var.efs_test_name}"

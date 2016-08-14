@@ -1,14 +1,16 @@
+opts := -var 'cidr="'`curl -s echoip.net`/32'"'
+
 tf-plan: id_rsa.pub
-	terraform plan -var cidr=`curl -s echoip.net`
+	terraform plan $(opts)
 
 tf-apply: id_rsa.pub
-	terraform apply -var cidr=`curl -s echoip.net`
+	terraform apply $(opts)
 
 tf-refresh: id_rsa.pub
-	terraform refresh -var cidr=`curl -s echoip.net`
+	terraform refresh $(opts)
 
 tf-destroy: id_rsa.pub
-	terraform destroy -var cidr=`curl -s echoip.net`
+	terraform destroy $(opts)
 
 id_rsa id_rsa.pub:
 	ssh-keygen -t rsa -f id_rsa -N ""
