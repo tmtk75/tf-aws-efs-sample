@@ -43,7 +43,7 @@ resource "aws_instance" "efs-test" {
     ami                         = "ami-d2c924b2"  # CentOS7: https://aws.amazon.com/marketplace/ordering?productId=b7ee8a69-ee97-4a49-9e68-afaee216db2e&ref_=dtl_psb_continue&region=ap-northeast-1
     instance_type               = "t2.nano"
     key_name                    = "${aws_key_pair.efs-test.key_name}"
-    security_groups             = [ "${aws_security_group.efs-test.id}" ]
+    vpc_security_group_ids      = [ "${aws_security_group.efs-test.id}" ]
     subnet_id                   = "${var.subnet_id_c}"
     iam_instance_profile        = "${aws_iam_instance_profile.node.name}"
     associate_public_ip_address = true
